@@ -18,7 +18,7 @@ public interface EmployeeDAO {
 	public void deleteemployeebyid(String id);
 	public void addEmployeeToRabbit(EmployeePostDTO employeeDto, BindingResult bindingresult);
 	public void saveemployee(Employee employee);
-	public void updatedetails(EmployeePostDTO employeeDto, String id);
+	public EmployeeGetDTO updatedetails(EmployeePostDTO employeeDto, String id);
 	public void checkForValidationErrors(BindingResult bindingresult);
 	public void checkIdForException(String id);
 }

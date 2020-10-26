@@ -1,6 +1,5 @@
 package com.employee.memberinfo.Controller.EmployeeDTO;
 
-import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -19,14 +18,13 @@ public class MappingDTO {
 
 		return emp;
 	}
-		
-	public EmployeeGetDTO EntityToDTO(Optional<Employee> employee) {
+
+	public EmployeeGetDTO EntityToDTO(Employee employee) {
 		EmployeeGetDTO employeegetdto=new EmployeeGetDTO();
-		employeegetdto.setAge(employee.get().getAge());
-		employeegetdto.setName(employee.get().getFirstName());
-		employeegetdto.setSurname(employee.get().getLastName());
+		employeegetdto.setAge(employee.getAge());
+		employeegetdto.setName(employee.getFirstName());
+		employeegetdto.setSurname(employee.getLastName());
 		
-		return employeegetdto;
-		
+		return employeegetdto;	
 	}
 }

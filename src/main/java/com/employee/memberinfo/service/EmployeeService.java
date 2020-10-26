@@ -18,6 +18,7 @@ import com.employee.memberinfo.Exception.EmployeePostException;
 import com.employee.memberinfo.Exception.EmployeeWithIdNotFoundException;
 import com.employee.memberinfo.Exception.RequestNotFoundException;
 import com.employee.memberinfo.Repository.EmployeeRepo;
+import com.employee.memberinfo.kafka.KafkaSend;
 import com.employee.memberinfo.model.Employee;
 import com.employee.memberinfo.rabbitmq.Producer;
 
@@ -30,6 +31,9 @@ public class EmployeeService implements EmployeeDAO {
 	
 	@Autowired
 	Producer produce;
+	
+	@Autowired
+	KafkaSend kafkasend;
 	
 	@Autowired
 	MappingDTO mappingdto;
@@ -69,7 +73,7 @@ public class EmployeeService implements EmployeeDAO {
 	public EmployeeGetDTO fetchDtoemployeebyid(String id) {
 		
 		checkIdForException(id);
-		return mappingdto.EntityToDTO(employeerepo.findById(id));
+		return mappingdto.EntityToDTO(employeerepo.findById(id).get());
 	}
 	
 	@Override
@@ -88,6 +92,16 @@ public class EmployeeService implements EmployeeDAO {
 		produce.sendpostemployee(employee);
 	}
 	
+	
+	public void addEmployeeToKafka(EmployeePostDTO employeeDto, BindingResult bindingresult) {
+		
+		checkForValidationErrors(bindingresult);
+		Employee employee=mappingdto.ConvertDTOtoEntity(employeeDto);
+		
+		kafkasend.sendMessage(employee);
+//		produce.sendpostemployee(employee);
+	}
+	
 	@Override
 	public void saveemployee(Employee employee) {
 		try 
@@ -102,7 +116,7 @@ public class EmployeeService implements EmployeeDAO {
 	}
 	
 	@Override
-	public void updatedetails(EmployeePostDTO employeeDto, String id) {
+	public EmployeeGetDTO updatedetails(EmployeePostDTO employeeDto, String id) {
 		
 		checkIdForException(id);
 
@@ -166,6 +180,7 @@ public class EmployeeService implements EmployeeDAO {
 		{throw new EmployeePostException(errormessage);}
 		
 		produce.sendpostemployee(employee);
+		return mappingdto.EntityToDTO(employee);
 
 	}
 	

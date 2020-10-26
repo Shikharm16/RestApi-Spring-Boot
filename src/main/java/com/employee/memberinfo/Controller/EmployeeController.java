@@ -25,6 +25,7 @@ import com.employee.memberinfo.Controller.EmployeeDTO.EmployeePostDTO;
 import com.employee.memberinfo.Exception.RequestNotFoundException;
 import com.employee.memberinfo.service.EmployeeService;
 
+
 @RestController
 @RequestMapping("employee")
 public class EmployeeController {
@@ -42,6 +43,7 @@ public class EmployeeController {
 		
 		return service.fetchAllDtoEmployee();
 	}
+	
 	
 	@Cacheable(value="employees",key="#id")
 	@GetMapping("{id}")
@@ -66,16 +68,24 @@ public class EmployeeController {
 				
 		service.addEmployeeToRabbit(employeeDto, bindingresult);
 		
-		return new ResponseEntity<String>("New Employee Created!" , HttpStatus.CREATED);	
+		return new ResponseEntity<String>("New Employee Created through rabbitmq!" , HttpStatus.CREATED);	
 	}
 	
-	@CachePut(value = "updated", key = "#id")
+	@PostMapping("kafka")
+	public ResponseEntity<String> AddEmployeeKafka(@Valid @RequestBody EmployeePostDTO employeeDto , BindingResult bindingresult) {
+				
+		service.addEmployeeToKafka(employeeDto, bindingresult);
+		
+		return new ResponseEntity<String>("New Employee Created throuugh kafka!" , HttpStatus.CREATED);	
+	}
+	
+	@CachePut(value = "employees", key = "#id")
 	@PatchMapping("{id}")
-	public ResponseEntity<String> UpdateEmployeeInfo(@RequestBody EmployeePostDTO employeeDto, @PathVariable String id)
+	public EmployeeGetDTO UpdateEmployeeInfo(@RequestBody EmployeePostDTO employeeDto, @PathVariable String id)
 	{		
-		service.updatedetails(employeeDto, id);
+		EmployeeGetDTO edto=service.updatedetails(employeeDto, id);
 
-		return new ResponseEntity<String>("Employee Updated Successfully!", HttpStatus.ACCEPTED);
+		return edto;
 	}
 	
 	@RequestMapping("*")

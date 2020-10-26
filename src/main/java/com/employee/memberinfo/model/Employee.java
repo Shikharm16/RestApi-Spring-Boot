@@ -14,8 +14,6 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.employee.memberinfo.model.customvalidation.IsEmail;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Employee implements Serializable {
@@ -27,7 +25,6 @@ public class Employee implements Serializable {
 	@GenericGenerator(name = "uuid4", strategy = "org.hibernate.id.UUIDGenerator")
 	@Column(name="Id")
 	@Id
-	@JsonIgnore
 	private String id;
 	
 	
@@ -48,21 +45,17 @@ public class Employee implements Serializable {
 	
 	@IsEmail(message="Email must be of form :: example@company.com") //custom validation
 	@NotBlank(message="Must provide email")
-	@JsonIgnore
 	@Column(name="Email")
 	private String email;
 	
-	@JsonIgnore
 	public String getEmail() {
 		return email;
 	}
 	
-	@JsonProperty
 	public void setEmail(String email) {
 		this.email = email;
 	}
 	
-
 	public int getAge() {
 		return age;
 	}
