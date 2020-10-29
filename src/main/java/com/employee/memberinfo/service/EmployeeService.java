@@ -20,7 +20,7 @@ import com.employee.memberinfo.Exception.RequestNotFoundException;
 import com.employee.memberinfo.Repository.EmployeeRepo;
 import com.employee.memberinfo.kafka.KafkaSend;
 import com.employee.memberinfo.model.Employee;
-import com.employee.memberinfo.rabbitmq.Producer;
+import com.employee.memberinfo.rabbitmq.RabbitMqProducer;
 
 @Component
 @Service
@@ -30,13 +30,16 @@ public class EmployeeService implements EmployeeDAO {
 	EmployeeRepo employeerepo;
 	
 	@Autowired
-	Producer produce;
+	RabbitMqProducer produce;
 	
 	@Autowired
 	KafkaSend kafkasend;
 	
 	@Autowired
 	MappingDTO mappingdto;
+	
+	@Autowired
+	EmployeeUpdateCheck employeeupdatecheck;
 	
 	
 	@Override
@@ -92,14 +95,13 @@ public class EmployeeService implements EmployeeDAO {
 		produce.sendpostemployee(employee);
 	}
 	
-	
+	@Override
 	public void addEmployeeToKafka(EmployeePostDTO employeeDto, BindingResult bindingresult) {
 		
 		checkForValidationErrors(bindingresult);
 		Employee employee=mappingdto.ConvertDTOtoEntity(employeeDto);
 		
 		kafkasend.sendMessage(employee);
-//		produce.sendpostemployee(employee);
 	}
 	
 	@Override
@@ -119,65 +121,8 @@ public class EmployeeService implements EmployeeDAO {
 	public EmployeeGetDTO updatedetails(EmployeePostDTO employeeDto, String id) {
 		
 		checkIdForException(id);
-
-		String errormessage=null;
-		Employee employee=new Employee();
-		Optional<Employee> retrive = fetchemployeebyid(id);
 		
-		employee.setId(id);
-		
-		if(true) {
-			if(employeeDto.getAge() == 0) {
-				employee.setAge(retrive.get().getAge());
-			}
-			else if(employeeDto.getAge()>=20 && employeeDto.getAge()<=60) {
-				employee.setAge(employeeDto.getAge());
-			}
-			else {
-				errormessage=errormessage+" AGE ERROR : Age is not in the range 20 to 60";
-			}
-		}
-		
-		if(true) {
-			if(employeeDto.getSurname() == null) {
-				employee.setLastName(retrive.get().getLastName());
-			}
-			else if(employeeDto.getSurname() != null && employeeDto.getSurname().length()>=2) {
-				employee.setLastName(employeeDto.getSurname());
-			}
-			else {
-				errormessage=errormessage+" SURNAME ERROR";
-			}
-		}
-
-		if(true) {
-			if(employeeDto.getName() == null) {
-				employee.setFirstName(retrive.get().getFirstName());
-			}
-			else if(employeeDto.getName() != null && employeeDto.getName().length()!=0) {
-				employee.setFirstName(employeeDto.getName());
-			}
-			else {
-				errormessage=errormessage+" NAME ERROR";
-			}
-		}
-		
-		if(true) {
-			if(employeeDto.getEmail() == null) {
-				employee.setEmail(retrive.get().getEmail());
-			}
-			else if(employeeDto.getEmail() != null && employeeDto.getEmail().contains("@")
-					&& employeeDto.getEmail().contains(".com") && employeeDto.getEmail().endsWith(".com")) {
-				
-				employee.setEmail(employeeDto.getEmail());
-			}
-			else {
-				errormessage=errormessage+" EMAIL ERROR";
-			}
-		}
-		
-		if(errormessage != null)
-		{throw new EmployeePostException(errormessage);}
+		Employee employee = employeeupdatecheck.check(id,employeeDto);
 		
 		produce.sendpostemployee(employee);
 		return mappingdto.EntityToDTO(employee);

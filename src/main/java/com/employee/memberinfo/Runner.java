@@ -7,7 +7,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
 import com.employee.memberinfo.kafka.KafkaSend;
-import com.employee.memberinfo.rabbitmq.Producer;
+import com.employee.memberinfo.rabbitmq.RabbitMqProducer;
 
 @Component
 public class Runner implements CommandLineRunner {
@@ -16,14 +16,14 @@ public class Runner implements CommandLineRunner {
 	RabbitTemplate template;
 		
 	@Autowired 
-	Producer produce;
-	
+	RabbitMqProducer produce;
+	 
 	@Autowired
 	KafkaSend kafkasend;
 	
 	@Autowired
 	ConfigurableApplicationContext ctx;
-	
+		
 	@Override
 	public void run(String... args) throws Exception {
 		

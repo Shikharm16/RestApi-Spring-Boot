@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.employee.memberinfo.model.Employee;
 
-public class Producer {
+public class RabbitMqProducer {
 
 	@Autowired
 	RabbitTemplate template;

@@ -17,6 +17,7 @@ public interface EmployeeDAO {
 	public EmployeeGetDTO fetchDtoemployeebyid(String id);
 	public void deleteemployeebyid(String id);
 	public void addEmployeeToRabbit(EmployeePostDTO employeeDto, BindingResult bindingresult);
+	public void addEmployeeToKafka(EmployeePostDTO employeeDto, BindingResult bindingresult);
 	public void saveemployee(Employee employee);
 	public EmployeeGetDTO updatedetails(EmployeePostDTO employeeDto, String id);
 	public void checkForValidationErrors(BindingResult bindingresult);

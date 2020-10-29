@@ -4,7 +4,7 @@ import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 
 
-public class Consumer {
+public class RabbitMqConsumer {
 		
 	@RabbitListener(queues="#{queue2.name}")
 	public void listner2(String message) {

@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class RmqConf {
+public class RabbitConf {
 	
 //	static final String queuename1="Practice-Queue-1";
 //	static final String queuename2="Practice-Queue-2";
@@ -43,19 +43,33 @@ public class RmqConf {
 		}
 		
 		@Bean
-		public Consumer reciever() {
-			return new Consumer();
+		public RabbitMqConsumer reciever() {
+			return new RabbitMqConsumer();
 		}
 		
 		@Bean
-		public PostEmployeeReciever postreciever() {
-			return new PostEmployeeReciever();
+		public RabbitEmployeePostReciever postreciever() {
+			return new RabbitEmployeePostReciever();
 		}
 	}
 	
 	@Bean
-	public Producer produce() {
-		return new Producer();
+	public RabbitMqProducer produce() {
+		return new RabbitMqProducer();
 	}
 	
+//	  @Bean
+//	  SimpleMessageListenerContainer container(ConnectionFactory connectionFactory,MessageListenerAdapter listenerAdapter) {
+//		  
+//	    SimpleMessageListenerContainer container = new SimpleMessageListenerContainer();
+//	    container.setConnectionFactory(connectionFactory);
+//	    container.setQueueNames(queueName);
+//	    container.setMessageListener(listenerAdapter);
+//	    return container;
+//	  }
+//
+//	  @Bean
+//	  MessageListenerAdapter listenerAdapter(Reciever receiver) {
+//	    return new MessageListenerAdapter(receiver, "receiveMessage");
+//	  }
 }

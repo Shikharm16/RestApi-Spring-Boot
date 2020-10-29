@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.employee.memberinfo.model.Employee;
 import com.employee.memberinfo.service.EmployeeService;
 
-public class PostEmployeeReciever {
+public class RabbitEmployeePostReciever {
 
 	@Autowired
 	EmployeeService service;

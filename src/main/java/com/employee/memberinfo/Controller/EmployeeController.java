@@ -32,25 +32,18 @@ public class EmployeeController {
 	
 	@Autowired
 	EmployeeService service;
-	
-	@GetMapping("page")
-	public String Getpage() {
-		return "login";
-	}
-		
+				
 	@GetMapping("")
 	public List<EmployeeGetDTO> fetchDtoEmployee() {
 		
 		return service.fetchAllDtoEmployee();
 	}
-	
-	
+		
 	@Cacheable(value="employees",key="#id")
 	@GetMapping("{id}")
 	public EmployeeGetDTO GetEmployeeById(@PathVariable String id) {
 				
 		EmployeeGetDTO fetchDtoemployeebyid = service.fetchDtoemployeebyid(id);
-		
 		return fetchDtoemployeebyid;
 	}
 		
@@ -64,7 +57,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("")
-	public ResponseEntity<String> AddEmployee(@Valid @RequestBody EmployeePostDTO employeeDto , BindingResult bindingresult) {
+	public ResponseEntity<String> AddEmployeeRedis(@Valid @RequestBody EmployeePostDTO employeeDto , BindingResult bindingresult) {
 				
 		service.addEmployeeToRabbit(employeeDto, bindingresult);
 		
@@ -83,9 +76,9 @@ public class EmployeeController {
 	@PatchMapping("{id}")
 	public EmployeeGetDTO UpdateEmployeeInfo(@RequestBody EmployeePostDTO employeeDto, @PathVariable String id)
 	{		
-		EmployeeGetDTO edto=service.updatedetails(employeeDto, id);
+		EmployeeGetDTO employeeUpdatedDto=service.updatedetails(employeeDto, id);
 
-		return edto;
+		return employeeUpdatedDto;
 	}
 	
 	@RequestMapping("*")
