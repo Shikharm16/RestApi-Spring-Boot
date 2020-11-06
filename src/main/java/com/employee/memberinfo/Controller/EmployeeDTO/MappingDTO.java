@@ -10,13 +10,13 @@ public class MappingDTO {
 	
 	
 	public Employee ConvertDTOtoEntity(EmployeePostDTO employeeDto) {
-		Employee emp=new Employee();
-		emp.setAge(employeeDto.getAge());
-		emp.setEmail(employeeDto.getEmail());
-		emp.setFirstName(employeeDto.getName());
-		emp.setLastName(employeeDto.getSurname());
+		Employee employee=new Employee();
+		employee.setAge(employeeDto.getAge());
+		employee.setEmail(employeeDto.getEmail());
+		employee.setFirstName(employeeDto.getName());
+		employee.setLastName(employeeDto.getSurname());
 
-		return emp;
+		return employee;
 	}
 
 	public EmployeeGetDTO EntityToDTO(Employee employee) {

@@ -31,6 +31,8 @@ public class Runner implements CommandLineRunner {
 //		produce.send();
 
 		kafkasend.sendMessage2("hello from kafka sender");
+//	    Thread.sleep(10000);
+//	    ctx.close();
 		
 	}
 

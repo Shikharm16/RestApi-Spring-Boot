@@ -10,8 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitConf {
 	
-//	static final String queuename1="Practice-Queue-1";
-//	static final String queuename2="Practice-Queue-2";
+	static final String queuename1="Red";
+	static final String queuename2="Black";
 	
 	@Bean
 	public DirectExchange direct() {
@@ -33,13 +33,13 @@ public class RabbitConf {
 		
 		
 		@Bean
-		public Binding bind1(Queue queue1 , DirectExchange direct) {
-			return BindingBuilder.bind(queue1).to(direct).with("Red");
+		public Binding bindWithQueue1(Queue queue1 , DirectExchange direct) {
+			return BindingBuilder.bind(queue1).to(direct).with(queuename1);
 		}
 		
 		@Bean
-		public Binding bind2(Queue queue2 , DirectExchange direct) {
-			return BindingBuilder.bind(queue2).to(direct).with("Black");
+		public Binding bindWithQueue2(Queue queue2 , DirectExchange direct) {
+			return BindingBuilder.bind(queue2).to(direct).with(queuename2);
 		}
 		
 		@Bean

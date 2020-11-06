@@ -108,7 +108,6 @@ public class EmployeeService implements EmployeeDAO {
 	public void saveemployee(Employee employee) {
 		try 
 		{ employeerepo.save(employee); }
-		
 		catch(Exception ex)
 		{ throw new EmployeePostException("One or more fields incorrect:"
 				+ " email (must have @ and .com) / age (between 20 to 60)/ Name (Can not be NULL)"
@@ -121,7 +120,6 @@ public class EmployeeService implements EmployeeDAO {
 	public EmployeeGetDTO updatedetails(EmployeePostDTO employeeDto, String id) {
 		
 		checkIdForException(id);
-		
 		Employee employee = employeeupdatecheck.check(id,employeeDto);
 		
 		produce.sendpostemployee(employee);
@@ -133,7 +131,6 @@ public class EmployeeService implements EmployeeDAO {
 	public void checkForValidationErrors(BindingResult bindingresult) {
 		
 		String errormessage="";
-		
 		if(bindingresult.hasErrors())
 		{
 			List<FieldError> errors = bindingresult.getFieldErrors();
