@@ -4,7 +4,8 @@ Multiple , Request are implemented like post,get,patch.delete for employee data 
 Redis is used for caching.<br />
 Kafka and rabbitmq are used for message broker for post and patch , Request.<br />
 
-< b> #Ports Used: http://localhost:port/ </b>
+<b> <h4>Ports Used: http://localhost:port/ 
+ </h4></b>
 <br/>
 Elastic search : 9200<br />
 kibana : 5601<br />
@@ -17,7 +18,8 @@ kafka - server : 9092<br />
 kafka-client-socket : /127.0.0.1:64664 <br />
 mysql : 3306<br />
 
-<b>#URL's: http://localhost:8080</b>
+<b>#URL's: http://localhost:8080
+</b>
 <br/>
 url-"/employee"       , Request - get    , Output - All employees.<br />
 url-"/employee"       , Request - post   , Output - Post employee with rabbitmq.<br />
@@ -41,6 +43,7 @@ kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --pa
 kafka-console-producer.bat --broker-list localhost:9092 --topic testing </br><
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic testing --from-beginning</br>
 kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic1 --config retention.ms=1000</br>
+</br>
 <b>
 #Software Requirements:
 </b>
