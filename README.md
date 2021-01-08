@@ -14,11 +14,12 @@ rabbitmq management : 15672<br />
 Apache-server (Current Project) : 8080<br />
 redis-server : 6379<br />
 kafka - zookeeper : 2181 (server-socketconnection)<br />
-kafka - server : 9092<br />
-kafka-client-socket : /127.0.0.1:64664 <br />
-mysql : 3306<br />
+kafka - server : 9092<br/>
+kafka-client-socket : /127.0.0.1:64664 <br/>
+mysql : 3306<br/>
 
-<b>#URL's: http://localhost:8080
+<br/>
+<b>URL's: http://localhost:8080
 </b>
 <br/>
 url-"/employee"       , Request - get    , Output - All employees.<br />
@@ -44,8 +45,9 @@ kafka-console-producer.bat --broker-list localhost:9092 --topic testing </br><
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic testing --from-beginning</br>
 kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic1 --config retention.ms=1000</br>
 </br>
+
 <b>
-#Software Requirements:
+Software Requirements:
 </b>
 <ol>
 <li> JAVA (14)</li>
