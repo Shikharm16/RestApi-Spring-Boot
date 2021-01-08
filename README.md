@@ -4,7 +4,7 @@ Multiple , Request are implemented like post,get,patch.delete for employee data 
 Redis is used for caching.<br />
 Kafka and rabbitmq are used for message broker for post and patch , Request.<br />
 
-#Ports Used: http://localhost:port/
+< b> #Ports Used: http://localhost:port/ </b>
 <br/>
 Elastic search : 9200<br />
 kibana : 5601<br />
@@ -17,7 +17,7 @@ kafka - server : 9092<br />
 kafka-client-socket : /127.0.0.1:64664 <br />
 mysql : 3306<br />
 
-#URL's: http://localhost:8080
+<b>#URL's: http://localhost:8080</b>
 <br/>
 url-"/employee"       , Request - get    , Output - All employees.<br />
 url-"/employee"       , Request - post   , Output - Post employee with rabbitmq.<br />
@@ -29,10 +29,11 @@ url-"/employee/redisentry" , Request-get   , Output - Get employees which are ca
 url-"/employee/redis/id" , Request - get   , Output - Get employee from redis.<br />
 <br/>
 
-CMD Commands:<br/>
+<b>CMD Commands:</b>
+<br/>
 To start redis server - reids-server.exe <br/>
 to start redis-client - redis-cli.exe <br/>
-<b> KAFKA COMMANDS <b/>
+<b> KAFKA COMMANDS </b>
 kafka-server-start.bat E:\kafka_2.13-2.6.0\config\server.properties </br>
 zookeeper-server-start.bat E:\kafka_2.13-2.6.0\config\zookeeper.properties</br>
 zookeeper-shell.bat localhost:2181 ls /brokers/ids </br>
@@ -40,8 +41,9 @@ kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --pa
 kafka-console-producer.bat --broker-list localhost:9092 --topic testing </br><
 kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic testing --from-beginning</br>
 kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic1 --config retention.ms=1000</br>
-
+<b>
 #Software Requirements:
+</b>
 <ol>
 <li> JAVA (14)</li>
 <li> Postman </li>
