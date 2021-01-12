@@ -37,13 +37,14 @@ url-"/employee/redis/id" , Request - get   , Output - Get employee from redis.<b
 To start redis server - reids-server.exe <br/>
 to start redis-client - redis-cli.exe <br/>
 <b> KAFKA COMMANDS </b>
-kafka-server-start.bat E:\kafka_2.13-2.6.0\config\server.properties </br>
-zookeeper-server-start.bat E:\kafka_2.13-2.6.0\config\zookeeper.properties</br>
-zookeeper-shell.bat localhost:2181 ls /brokers/ids </br>
-kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic testing </br>
-kafka-console-producer.bat --broker-list localhost:9092 --topic testing </br><
-kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic testing --from-beginning</br>
-kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic1 --config retention.ms=1000</br>
+<br/>
+> kafka-server-start.bat E:\kafka_2.13-2.6.0\config\server.properties </br>
+> zookeeper-server-start.bat E:\kafka_2.13-2.6.0\config\zookeeper.properties</br>
+> zookeeper-shell.bat localhost:2181 ls /brokers/ids </br>
+> kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic testing </br>
+> kafka-console-producer.bat --broker-list localhost:9092 --topic testing </br>
+> kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic testing --from-beginning</br>
+> kafka-topics.sh --zookeeper localhost:2181 --alter --topic topic1 --config retention.ms=1000</br>
 </br>
 
 <b>
